@@ -20,7 +20,9 @@ let UserSchema = mongoose.Schema({ //회원
     }, //프로필 사진
     name: { type: String }, //이름
     email: { type: String }, //이메일(아이디)
-    passwd: { type: String } //비밀번호
+    passwd: { type: String }, //비밀번호
+    interest_main: { type: String }, // 주 관심사
+    interest_sub: { type: String } // 보조 관심사
 });
 
 let GroupSchema = mongoose.Schema({ //그룹
@@ -64,7 +66,7 @@ require('./err')(UserSchema, GroupSchema, BoardSchema, CommentSchema);
 let Users = mongoose.model("users", UserSchema);
 let Groups = mongoose.model("groups", GroupSchema);
 let Boards = mongoose.model("boards", BoardSchema);
-let Commets = mongoose.model("commets", CommentSchema);
+let Comments = mongoose.model("commets", CommentSchema);
 
 export { Users, Groups, Boards, Comments };
 
