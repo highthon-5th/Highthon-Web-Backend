@@ -31,7 +31,7 @@ let UserSchema = mongoose.Schema({ //회원
 let CommentSchema = mongoose.Schema({ //
     token: { type: String }, // 토큰
     comment: { type: String }, // 댓글
-    user_token: { type: String }, // 쓴 사람 토큰
+    email: { type: String }, // 쓴 사람
     date: { type: Date, default: Date.now } //수정 날짜
 });
 
