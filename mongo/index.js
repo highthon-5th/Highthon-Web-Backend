@@ -14,16 +14,23 @@ db.once('open', function callback() { console.log("Mongo On"); });
 
 let UserSchema = mongoose.Schema({ //회원
     token: { type: String }, // 토큰
-    image: { type: String }, //프로필 사진
+    image: [{
+        id: String, //id
+        url: String //url
+    }], //프로필 사진
     name: { type: String }, //이름
     email: { type: String }, //이메일(아이디)
-    passwd: { type: String }, //비밀번호
+    password: { type: String }, //비밀번호
     interest_main: { type: String }, // 주 관심사
     interest_sub: { type: String } // 보조 관심사
 });
 
 let GroupSchema = mongoose.Schema({ //그룹
     token: { type: String }, // 토큰
+    image: {
+        id: { type: String }, //id
+        url: { type: String } //url
+    }, //그룹 사진
     name: { type: String }, //그룹이름
     introduction: { type: String }, //소개
     date: { type: Date, default: Date.now }, //생성 날짜
@@ -37,9 +44,13 @@ let BoardSchema = mongoose.Schema({ //게시판
     title: { type: String }, // 제목
     content: { type: String }, // 내용
     date: { type: Date, default: Date.now }, //수정 날짜
+    images: [{
+        id: { type: String }, //id
+        url: { type: String } //url
+    }], //그룹 사진
     comments: [{
-        token: { type: String } // 토큰
-    }], //댓글 토큰,
+            token: { type: String } // 토큰
+        }] //댓글 토큰
 });
 
 let CommentSchema = mongoose.Schema({ //댓글
@@ -49,6 +60,26 @@ let CommentSchema = mongoose.Schema({ //댓글
     date: { type: Date, default: Date.now } //수정 날짜
 });
 
+UserSchema.statics.create = function (name, email, password, interest_main) {
+    const user = new this({
+        name,
+        email,
+        password,
+        interest_main
+    });
+
+    return user.save();
+};
+
+UserSchema.statics.findOneByEmail = function (email) {
+    return this.findOne({
+        email
+    }).exec();
+}
+
+UserSchema.methods.verify = function (password) {
+    return this.password = password
+}
 
 require('./err')(UserSchema, GroupSchema, BoardSchema, CommentSchema);
 
