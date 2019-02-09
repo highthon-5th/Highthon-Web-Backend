@@ -21,9 +21,6 @@ app.use(express.session({
 
 //module setting
 import { Users, Groups, Boards, Comments } from './mongo';
-app.get('/', function(req, res) {
-    console.log('test');
-});
 
 //서버 실행
 const PORT = process.env.PORT || 3000;

@@ -66,6 +66,6 @@ let Groups = mongoose.model("groups", GroupSchema);
 let Boards = mongoose.model("boards", BoardSchema);
 let Commets = mongoose.model("commets", CommentSchema);
 
-export { Users, Groups, Boards, Commets };
+export { Users, Groups, Boards, Comments };
 
 export default db;
