@@ -28,7 +28,7 @@ require('./routes/auth/auth')(app);
 require('./routes/board/setBoard')(app, Users, Groups, Boards);
 require('./routes/board/viewBoard')(app, Users, Boards);
 require('./routes/comment/addComment')(app, Users, Boards, Comments);
-// require('./routes/comment/delComment')(app);
+require('./routes/comment/delComment')(app, Users, Boards, Comments); //이건 안씀!
 require('./routes/group/joinGroup')(app, Users, Groups);
 require('./routes/group/leaveGroup')(app, Users, Groups);
 require('./routes/group/setGroup')(app, Users, Groups);
