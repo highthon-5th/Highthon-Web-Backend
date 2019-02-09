@@ -1,7 +1,8 @@
 module.exports = (app, Users, Groups) => {
         app.post('/joinGroup', async(req, res) => {
                 let user_token = req.body.user_token;
-                Groups.findOne({ token: req.body.group_token }, (err, rawContent) => {
+                let group_token = req.body.group_token;
+                Groups.findOne({ token: group_token }, (err, rawContent) => {
                     if (err) throw err;
 
                     rawContent.members.unshift({ token: user_token });

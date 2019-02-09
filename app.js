@@ -31,7 +31,7 @@ require('./routes/board/viewBoard')(app, Users, Boards, Comments);
 // require('./routes/comment/addComment')(app);
 // require('./routes/comment/delComment')(app);
 require('./routes/group/joinGroup')(app, Users, Groups);
-// require('./routes/group/leaveGroup')(app, Users, Groups);
+require('./routes/group/leaveGroup')(app, Users, Groups);
 require('./routes/group/setGroup')(app, Users, Groups);
 require('./routes/group/viewGroup')(app, Users, Groups, Boards);
 // require('./routes/search/index')(app);
