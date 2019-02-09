@@ -1,0 +1,31 @@
+{
+    "name": "highthon5",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "NODE_ENV=test mocha ./app.spec.js",
+        "start": "node app.js"
+    },
+    "dependencies": {
+        "body-parser": "~1.15.1",
+        "connect-mongo": "^2.0.1",
+        "cookie-session": "^2.0.0-beta.3",
+        "express": "^3.21.2",
+        "express-session": "^1.15.6",
+        "mongoose": "*",
+        "multiparty": "^4.2.1",
+        "path": "*",
+        "randomstring": "*"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-core": "^6.26.0",
+        "babel-plugin-transform-function-bind": "^6.22.0",
+        "babel-plugin-transform-regenerator": "^6.26.0",
+        "babel-preset-env": "^1.6.0",
+        "babel-preset-stage-3": "^6.24.1"
+    },
+    "author": "",
+    "license": "ISC"
+}
