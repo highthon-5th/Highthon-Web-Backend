@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: Highthon5
+  description: honeypot
+  version: 1.0.0
+servers:
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  /signup:
+    post:
+      tags:
+        - auth
+      summary: signing up.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: name
+          description: User Name
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+        - in: body
+          name: email
+          description: User Email
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+        - in: body
+          name: passwd
+          description: User Password
+          required: true
+          schema:
+            type: object
+            required:
+              - passwd
+            properties:
+              passwd:
+                type: string
+        - in: body
+          name: name
+          description: User Name
+          required: true
+          schema:
+            type: object
+            required:
+              - name
+            properties:
+              name:
+                type: string
+      responses:
+        200:
+          description: Successfully created
+        409:
+          description: Users is already exist
+        
+  /signin:
+    post:
+      tags:
+        - auth
+      summary: Login User.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: email
+          description: User Email
+          required: true
+          schema:
+            type: object
+            required:
+              - email
+            properties:
+              email:
+                type: string
+        - in: body
+          name: passwd
+          description: User Password
+          required: true
+          schema:
+            type: object
+            required:
+              - passwd
+            properties:
+              passwd:
+                type: string
+      responses:
+        200:
+          description: Successfully Logined
+          example:
+ *           { "message": "success", token }
+        409:
+          description: Login failed
+
+  /viewprofile:
+    post:
+      tags:
+        - view
+      summary: Viewing User Profile.
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: token
+          description: User JWT auth token
+          required: true
+          schema:
+            type: object
+            required:
+              - token
+            properties:
+              token:
+                type: string
+      responses:
+        200:
+          description: Successfully Showed
+          example:
+ *          {
+                "name": "kim",
+                "email": "highthon@email.com",
+                "password": "0000",
+                "interest_main": "대회",
+                "joined_groups": []
+            }
+        403:
+          description: not logged in

@@ -1,7 +1,7 @@
 import rndstring from 'randomstring'
 import jwt from 'jsonwebtoken';
 module.exports = (app, Users, Groups) => {
-        app.post('/viewProfile', async(req, res) => {
+        app.get('/viewProfile', async(req, res) => {
             // let user_token = req.body.user_token;
             let board_token = req.body.board_token;
 

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost/highthon5', { useNewUrlParser: true }).then(() => {
+mongoose.connect('mongodb://wisemuji:gusanwl0307@ds129085.mlab.com:29085/highthon5', { useNewUrlParser: true }).then(() => {
     console.log("Connected to Database");
 }).catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
@@ -40,6 +40,7 @@ let GroupSchema = mongoose.Schema({ //그룹
     }, //그룹 사진
     name: { type: String }, //그룹이름
     introduction: { type: String }, //소개
+    cartegory: { type: String }, //카테고리
     date: { type: Date, default: Date.now }, //생성 날짜
     members: [{
         email: { type: String } // 토큰
@@ -56,7 +57,7 @@ let UserSchema = mongoose.Schema({ //회원
     email: { type: String }, //이메일(아이디)
     password: { type: String }, //비밀번호
     joined_groups: [GroupSchema], //비밀번호
-    interest_main: { type: String }, // 주 관심사
+    interest: { type: String }, // 관심사
 });
 
 UserSchema.statics.create = function(name, email, password, interest_main) {
