@@ -20,9 +20,9 @@ app.use(express.session({
 }));
 
 //module setting
-// import { Users, Hackathons } from './mongo';
-app.get('/test', function(req, res) {
-    console.log(req.body);
+import { Users, Groups, Boards, Comments } from './mongo';
+app.get('/', function(req, res) {
+    console.log('test');
 });
 
 //서버 실행
