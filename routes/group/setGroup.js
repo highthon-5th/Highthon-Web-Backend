@@ -1,10 +1,9 @@
-import express from 'express'
-let router = express.Router();
+import rndstring from 'randomstring'
 
-module.exports = function(app, Users, Groups) {
+module.exports = (app, Users, Groups) => {
     app.post('/setGroup', async(req, res) => {
             let group = new Groups(req.body);
-            // group.token = rndstring.generate(25);
+            group.token = rndstring.generate(25);
             try {
                 var result = await group.save();
             } catch (e) {
@@ -17,5 +16,14 @@ module.exports = function(app, Users, Groups) {
         .post('/aa', async(req, res) => {
             var result = await Groups.find()
             res.status(200).json(result)
+        })
+        .post('/delGroup', async(req, res) => {
+            Groups.remove({}, (err) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    res.end('success');
+                }
+            });
         })
 }

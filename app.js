@@ -1,7 +1,7 @@
 import express from 'express'
-import session from 'express-session'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
+import rndstring from 'randomstring'
 
 let app = express();
 
@@ -9,14 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     limit: '1gb',
     extended: false
-}));
-
-app.use(express.session({
-    key: 'sid', // 세션키
-    secret: 'secret', // 비밀키
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 1 // 쿠키 유효기간 1시간
-    }
 }));
 
 //module setting
@@ -38,6 +30,6 @@ app.listen(PORT, function() {
 // require('./routes/group/joinGroup')(app);
 // require('./routes/group/leaveGroup')(app);
 require('./routes/group/setGroup')(app, Users, Groups);
-// require('./routes/group/viewGroup')(app);
+require('./routes/group/viewGroup')(app, Users, Groups, Boards);
 // require('./routes/search/index')(app);
 require('./routes/index')(app);
