@@ -37,7 +37,7 @@ app.listen(PORT, function() {
 // require('./routes/comment/delComment')(app);
 // require('./routes/group/joinGroup')(app);
 // require('./routes/group/leaveGroup')(app);
-// require('./routes/group/setGroup')(app);
+require('./routes/group/setGroup')(app, Users, Groups);
 // require('./routes/group/viewGroup')(app);
 // require('./routes/search/index')(app);
 require('./routes/index')(app);
