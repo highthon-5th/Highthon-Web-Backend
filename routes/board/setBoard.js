@@ -11,13 +11,20 @@ module.exports = (app, Users, Groups, Boards) => {
                 if (e instanceof ValidationError) return res.status(400).json({ message: e.message });
                 if (e instanceof paramsError) return res.status(400).json({ message: e.message });
             }
+            Groups.findOne({ token: board.group_token }, (err, rawContent) => {
+                if (err) throw err;
+                rawContent.boards.unshift(board);
+                rawContent.save((err) => {
+                    if (err) throw err;
+                });
+            });
             res.status(200).json(board);
         })
-        .post('/aaBoard', async(req, res) => {
+        .post('/aaBoards', async(req, res) => {
             var result = await Boards.find()
             res.status(200).json(result)
         })
-        .post('/delBoard', async(req, res) => {
+        .post('/delBoards', async(req, res) => {
             Boards.remove({}, (err) => {
                 if (err) {
                     console.log(err)

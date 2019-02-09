@@ -11,7 +11,7 @@ module.exports = (app) => {
      *     password,
      *     interest
      * }
-    */
+     */
     app.post('/signup', (req, res) => {
         const { name, email, password, interest } = req.body;
         let newUser = null;
@@ -37,9 +37,9 @@ module.exports = (app) => {
         }
 
         Users.findOneByEmail(email)
-        .then(create)
-        .then(respond)
-        .catch(onError)
+            .then(create)
+            .then(respond)
+            .catch(onError)
     });
 
     /**
@@ -60,16 +60,16 @@ module.exports = (app) => {
                 if (user.verify(password)) {
                     let p = new Promise((resolve, reject) => {
                         jwt.sign({
-                            _id: user._id,
-                            email: user.email
-                        },
-                        secret, {
-                            expiresIn: '1h',
-                            subject: 'userInfo'
-                        }, (err, token) => {
-                            if (err) reject(err)
-                            resolve(token)
-                        });
+                                _id: user._id,
+                                email: user.email
+                            },
+                            secret, {
+                                expiresIn: '1h',
+                                subject: 'userInfo'
+                            }, (err, token) => {
+                                if (err) reject(err)
+                                resolve(token)
+                            });
                     });
 
                     return p;
@@ -78,6 +78,46 @@ module.exports = (app) => {
                 }
             }
         }
+
+        app.post('/check', (req, res) => {
+            const token = req.body.token
+                // token does not exist
+            if (!token) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'not logged in'
+                })
+            }
+
+            // create a promise that decodes the token
+            const p = new Promise(
+                (resolve, reject) => {
+                    jwt.verify(token, req.app.get('jwt-secret'), (err, decoded) => {
+                        if (err) reject(err)
+                        resolve(decoded)
+                    })
+                }
+            )
+
+            // if token is valid, it will respond with its info
+            const respond = (token) => {
+                res.json({
+                    success: true,
+                    info: token
+                })
+            }
+
+            // if it has failed to verify, it will return an error message
+            const onError = (error) => {
+                res.status(403).json({
+                    success: false,
+                    message: error.message
+                })
+            }
+
+            // process the promise
+            p.then(respond).catch(onError)
+        });
 
         let respond = (token) => {
             res.json({
@@ -94,8 +134,8 @@ module.exports = (app) => {
         }
 
         Users.findOneByEmail(email)
-        .then(check)
-        .then(respond)
-        .catch(onError)
+            .then(check)
+            .then(respond)
+            .catch(onError)
     });
 }

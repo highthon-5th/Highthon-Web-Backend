@@ -24,11 +24,10 @@ app.listen(PORT, function() {
 });
 
 require('./routes/auth/auth')(app);
-// require('./routes/auth/modifyProfile')(app);
 // require('./routes/auth/viewProfile')(app);
 require('./routes/board/setBoard')(app, Users, Groups, Boards);
-require('./routes/board/viewBoard')(app, Users, Boards, Comments);
-// require('./routes/comment/addComment')(app);
+require('./routes/board/viewBoard')(app, Users, Boards);
+require('./routes/comment/addComment')(app, Users, Boards, Comments);
 // require('./routes/comment/delComment')(app);
 require('./routes/group/joinGroup')(app, Users, Groups);
 require('./routes/group/leaveGroup')(app, Users, Groups);
