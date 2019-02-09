@@ -13,7 +13,7 @@ module.exports = (app, Users, Groups) => {
             }
             res.status(200).json(group);
         })
-        .post('/aa', async(req, res) => {
+        .post('/aaGroup', async(req, res) => {
             var result = await Groups.find()
             res.status(200).json(result)
         })

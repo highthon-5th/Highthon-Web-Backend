@@ -37,13 +37,9 @@ let BoardSchema = mongoose.Schema({ //게시판
     title: { type: String }, // 제목
     content: { type: String }, // 내용
     date: { type: Date, default: Date.now }, //수정 날짜
-    images: [{
-        id: { type: String }, //id
-        url: { type: String } //url
-    }], //그룹 사진
     comments: [{
-            token: { type: String } // 토큰
-        }] //댓글 토큰
+        token: { type: String } // 토큰
+    }], //댓글 토큰,
 });
 
 let CommentSchema = mongoose.Schema({ //댓글

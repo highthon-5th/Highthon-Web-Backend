@@ -23,7 +23,7 @@ app.listen(PORT, function() {
 // require('./routes/auth/auth')(app);
 // require('./routes/auth/modifyProfile')(app);
 // require('./routes/auth/viewProfile')(app);
-// require('./routes/board/setBoard')(app);
+require('./routes/board/setBoard')(app, Users, Groups, Boards);
 // require('./routes/board/viewBoard')(app);
 // require('./routes/comment/addComment')(app);
 // require('./routes/comment/delComment')(app);
