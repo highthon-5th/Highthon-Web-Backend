@@ -12,21 +12,6 @@ let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback() { console.log("Mongo On"); });
 
-let UserSchema = mongoose.Schema({ //회원
-    token: { type: String }, // 토큰
-    image: [{
-        id: String, //id
-        url: String //url
-    }], //프로필 사진
-    name: { type: String }, //이름
-    email: { type: String }, //이메일(아이디)
-    password: { type: String }, //비밀번호
-    joined_groups: [{
-        token: String
-    }], //비밀번호
-    interest_main: { type: String }, // 주 관심사
-    interest_sub: { type: String } // 보조 관심사
-});
 
 let CommentSchema = mongoose.Schema({ //
     token: { type: String }, // 토큰
@@ -57,9 +42,21 @@ let GroupSchema = mongoose.Schema({ //그룹
     introduction: { type: String }, //소개
     date: { type: Date, default: Date.now }, //생성 날짜
     members: [{
-        token: { type: String } // 토큰
+        email: { type: String } // 토큰
     }], //멤버 토큰
     boards: [BoardSchema]
+});
+let UserSchema = mongoose.Schema({ //회원
+    token: { type: String }, // 토큰
+    image: [{
+        id: String, //id
+        url: String //url
+    }], //프로필 사진
+    name: { type: String }, //이름
+    email: { type: String }, //이메일(아이디)
+    password: { type: String }, //비밀번호
+    joined_groups: [GroupSchema], //비밀번호
+    interest_main: { type: String }, // 주 관심사
 });
 
 UserSchema.statics.create = function(name, email, password, interest_main) {

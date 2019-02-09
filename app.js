@@ -24,7 +24,7 @@ app.listen(PORT, function() {
 });
 
 require('./routes/auth/auth')(app);
-// require('./routes/auth/viewProfile')(app);
+require('./routes/auth/viewProfile')(app, Users, Groups);
 require('./routes/board/setBoard')(app, Users, Groups, Boards);
 require('./routes/board/viewBoard')(app, Users, Boards);
 require('./routes/comment/addComment')(app, Users, Boards, Comments);

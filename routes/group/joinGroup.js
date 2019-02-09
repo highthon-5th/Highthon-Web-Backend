@@ -24,14 +24,15 @@ module.exports = (app, Users, Groups) => {
                 )
 
                 // if token is valid, it will respond with its info
-                const respond = (token) => {
+                const respond = async(token) => {
 
-                    Users.findOne({ email: token.email }, (err, rawContent) => {
+                    await Users.findOne({ email: token.email }, async(err, rawContent) => {
                         if (err) throw err;
-
-                        rawContent.joined_groups.unshift({ token: group_token });
-                        rawContent.save(function(err) {
-                            if (err) throw err;
+                        await Groups.findOne({ token: group_token }, (err, group) => {
+                            rawContent.joined_groups.unshift({ token: group_token, name: group.name, introduction: group.introduction });
+                            rawContent.save(function(err) {
+                                if (err) throw err;
+                            });
                         });
                     });
 
